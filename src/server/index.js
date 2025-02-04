@@ -7,7 +7,7 @@ import { config } from "dotenv";
 import { fileURLToPath } from "url";
 config();
 
-const PORT = process.env.SERVER_PORT || 8800;
+const PORT = process.env.VITE_SERVER_PORT || 8800;
 const SYNTHEA_EXECUTABLE = path.resolve(process.env.SYNTHEA_EXECUTABLE_PATH);
 const app = express();
 
@@ -25,13 +25,11 @@ app.post("/generate", (req, res) => {
     const { seed, populationSize, clinicianSeed, gender, location } = req.body;
     const outputDir = `${seed}-${location.state}-${Date.now()}`;
 
-    const command = `$JAVA_HOME/bin/java -jar ${SYNTHEA_EXECUTABLE} -s ${Number(
-        seed
-    )} -p ${Number(populationSize)} -cs ${Number(
-        clinicianSeed
-    )} -g ${gender[0].toUpperCase()} ${
+    const command = `${SYNTHEA_EXECUTABLE} -s ${Number(seed)} -p ${Number(
+        populationSize
+    )} -cs ${Number(clinicianSeed)} -g ${gender[0].toUpperCase()} ${
         location.state
-    } --exporter.baseDirectory="${distDir}/${outputDir}"`;
+    } ${location.city} --exporter.baseDirectory="${distDir}/${outputDir}"`;
 
     exec(command, (error, _, stderr) => {
         if (error) {

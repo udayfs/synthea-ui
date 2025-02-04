@@ -32,8 +32,10 @@ export default function MainForm() {
     });
 
     const fetchOutput: SubmitHandler<SParameters> = async (params) => {
-        // Server POST route api URL
-        const URL = "http://localhost:9966/generate";
+        // Server's POST route api URL
+        const URL = `http://localhost:${
+            import.meta.env.VITE_SERVER_PORT
+        }/generate`;
 
         try {
             const res = await axios.post(URL, params, {
@@ -55,7 +57,7 @@ export default function MainForm() {
             <div className="flex flex-col items-center antialiased font-bold text-4xl text-gray-400 font-mono ">
                 <p>Synthea UI</p>
                 <p className="italic text-black text-sm text-black font-semibold">
-                    (version 3.3.0)
+                    (version 0.1.0)
                 </p>
             </div>
             <form
