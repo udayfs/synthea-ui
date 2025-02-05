@@ -25,14 +25,13 @@ export default function MainForm() {
                 city: "",
             },
             populationSize: 1,
-            seed: String(Math.floor(Math.random() * 10937422340)),
-            clinicianSeed: String(Math.floor(Math.random() * 10937422340)),
+            seed: String(Math.floor(Math.random() * 1e6)),
+            clinicianSeed: String(Math.floor(Math.random() * 1e6)),
             gender: "Male",
         },
     });
 
     const fetchOutput: SubmitHandler<SParameters> = async (params) => {
-        // Server's POST route api URL
         const URL = `http://localhost:${
             import.meta.env.VITE_SERVER_PORT
         }/generate`;

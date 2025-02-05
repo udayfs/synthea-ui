@@ -23,7 +23,6 @@ cd synthea-ui
 
 - The next two steps are crucial as they involves steps for configuring _Synthea UI_ server for generating output via the Synthea &trade; build we created in the first step.
 ``` bash
-cd synthea-ui
 mv .env.example .env
 ```
 
